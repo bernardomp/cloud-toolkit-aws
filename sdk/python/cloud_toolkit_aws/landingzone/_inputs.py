@@ -210,31 +210,53 @@ class AccountPasswordPolicyRulesArgsArgs:
 @pulumi.input_type
 class OrganizationAccountArgsArgs:
     def __init__(__self__, *,
+                 email: pulumi.Input[str],
+                 name: pulumi.Input[str],
                  account_id: Optional[pulumi.Input[str]] = None,
                  admin_role_name: Optional[pulumi.Input[str]] = None,
-                 email: Optional[pulumi.Input[str]] = None,
-                 name: Optional[pulumi.Input[str]] = None,
                  ou: Optional[pulumi.Input[str]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] account_id: The AWS Account ID to be used to import the Account in the Organization. If not set, a new AWS Account will be created.
-        :param pulumi.Input[str] admin_role_name: Admin role for the IAM Account.
         :param pulumi.Input[str] email: The email associated to the IAM Account.
         :param pulumi.Input[str] name: The name of the IAM Account.
+        :param pulumi.Input[str] account_id: The AWS Account ID to be used to import the Account in the Organization. If not set, a new AWS Account will be created.
+        :param pulumi.Input[str] admin_role_name: Admin role for the IAM Account.
         :param pulumi.Input[str] parent_id: The parentId of the imported account.
         """
+        pulumi.set(__self__, "email", email)
+        pulumi.set(__self__, "name", name)
         if account_id is not None:
             pulumi.set(__self__, "account_id", account_id)
         if admin_role_name is not None:
             pulumi.set(__self__, "admin_role_name", admin_role_name)
-        if email is not None:
-            pulumi.set(__self__, "email", email)
-        if name is not None:
-            pulumi.set(__self__, "name", name)
         if ou is not None:
             pulumi.set(__self__, "ou", ou)
         if parent_id is not None:
             pulumi.set(__self__, "parent_id", parent_id)
+
+    @property
+    @pulumi.getter
+    def email(self) -> pulumi.Input[str]:
+        """
+        The email associated to the IAM Account.
+        """
+        return pulumi.get(self, "email")
+
+    @email.setter
+    def email(self, value: pulumi.Input[str]):
+        pulumi.set(self, "email", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        The name of the IAM Account.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter(name="accountId")
@@ -259,30 +281,6 @@ class OrganizationAccountArgsArgs:
     @admin_role_name.setter
     def admin_role_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "admin_role_name", value)
-
-    @property
-    @pulumi.getter
-    def email(self) -> Optional[pulumi.Input[str]]:
-        """
-        The email associated to the IAM Account.
-        """
-        return pulumi.get(self, "email")
-
-    @email.setter
-    def email(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "email", value)
-
-    @property
-    @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[str]]:
-        """
-        The name of the IAM Account.
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter

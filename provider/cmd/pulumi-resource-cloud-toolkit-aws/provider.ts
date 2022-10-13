@@ -35,6 +35,8 @@ export class Provider implements pulumi.provider.Provider {
         return await constructKubernetesCertManager(name, inputs, options);
       case "cloud-toolkit-aws:kubernetes:ExternalDns":
         return await constructKubernetesExternalDns(name, inputs, options);
+      case "cloud-toolkit-aws:kubernetes:ClusterAutoscaler":
+        return await constructKubernetesClusterAutoscaler(name, inputs, options);
       case "cloud-toolkit-aws:landingZone:AccountIam":
         return await constructLandingZoneAccountIam(name, inputs, options);
       case "cloud-toolkit-aws:landingZone:Organization":
@@ -135,6 +137,23 @@ async function constructKubernetesExternalDns(
   options: pulumi.ComponentResourceOptions
 ): Promise<pulumi.provider.ConstructResult> {
   const resource = new ExternalDns(name, inputs as ExternalDnsArgs, options);
+
+  return {
+    urn: resource.urn,
+    state: {
+      application: resource.application,
+      irsa: resource.irsa,
+      namespace: resource.namespace,
+    },
+  };
+}
+
+async function constructKubernetesClusterAutoscaler(
+  name: string,
+  inputs: pulumi.Inputs,
+  options: pulumi.ComponentResourceOptions
+): Promise<pulumi.provider.ConstructResult> {
+  const resource = new CertManager(name, inputs as CertManagerArgs, options);
 
   return {
     urn: resource.urn,

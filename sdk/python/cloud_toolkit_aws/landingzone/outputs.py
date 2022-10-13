@@ -35,21 +35,19 @@ class AccountMappingArgs(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 account: Optional['pulumi_aws.organizations.Account'] = None,
-                 account_name: Optional[str] = None):
-        if account is not None:
-            pulumi.set(__self__, "account", account)
-        if account_name is not None:
-            pulumi.set(__self__, "account_name", account_name)
+                 account: 'pulumi_aws.organizations.Account',
+                 account_name: str):
+        pulumi.set(__self__, "account", account)
+        pulumi.set(__self__, "account_name", account_name)
 
     @property
     @pulumi.getter
-    def account(self) -> Optional['pulumi_aws.organizations.Account']:
+    def account(self) -> 'pulumi_aws.organizations.Account':
         return pulumi.get(self, "account")
 
     @property
     @pulumi.getter(name="accountName")
-    def account_name(self) -> Optional[str]:
+    def account_name(self) -> str:
         return pulumi.get(self, "account_name")
 
 
@@ -75,21 +73,19 @@ class OrganizationalUnitMapping(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 account_name: Optional[str] = None,
-                 organizational_unit: Optional['pulumi_aws.organizations.OrganizationalUnit'] = None):
-        if account_name is not None:
-            pulumi.set(__self__, "account_name", account_name)
-        if organizational_unit is not None:
-            pulumi.set(__self__, "organizational_unit", organizational_unit)
+                 account_name: str,
+                 organizational_unit: 'pulumi_aws.organizations.OrganizationalUnit'):
+        pulumi.set(__self__, "account_name", account_name)
+        pulumi.set(__self__, "organizational_unit", organizational_unit)
 
     @property
     @pulumi.getter(name="accountName")
-    def account_name(self) -> Optional[str]:
+    def account_name(self) -> str:
         return pulumi.get(self, "account_name")
 
     @property
     @pulumi.getter(name="organizationalUnit")
-    def organizational_unit(self) -> Optional['pulumi_aws.organizations.OrganizationalUnit']:
+    def organizational_unit(self) -> 'pulumi_aws.organizations.OrganizationalUnit':
         return pulumi.get(self, "organizational_unit")
 
 

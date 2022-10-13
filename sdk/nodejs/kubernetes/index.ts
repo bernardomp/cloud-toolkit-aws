@@ -25,6 +25,10 @@ export { ClusterAddonsArgs } from "./clusterAddons";
 export type ClusterAddons = import("./clusterAddons").ClusterAddons;
 export const ClusterAddons: typeof import("./clusterAddons").ClusterAddons = null as any;
 
+export { ClusterAutoscalerArgs } from "./clusterAutoscaler";
+export type ClusterAutoscaler = import("./clusterAutoscaler").ClusterAutoscaler;
+export const ClusterAutoscaler: typeof import("./clusterAutoscaler").ClusterAutoscaler = null as any;
+
 export { ExternalDnsArgs } from "./externalDns";
 export type ExternalDns = import("./externalDns").ExternalDns;
 export const ExternalDns: typeof import("./externalDns").ExternalDns = null as any;
@@ -46,6 +50,7 @@ utilities.lazyLoad(exports, ["ArgoCD"], () => require("./argoCD"));
 utilities.lazyLoad(exports, ["CertManager"], () => require("./certManager"));
 utilities.lazyLoad(exports, ["Cluster"], () => require("./cluster"));
 utilities.lazyLoad(exports, ["ClusterAddons"], () => require("./clusterAddons"));
+utilities.lazyLoad(exports, ["ClusterAutoscaler"], () => require("./clusterAutoscaler"));
 utilities.lazyLoad(exports, ["ExternalDns"], () => require("./externalDns"));
 utilities.lazyLoad(exports, ["IngressNginx"], () => require("./ingressNginx"));
 utilities.lazyLoad(exports, ["Irsa"], () => require("./irsa"));
@@ -68,6 +73,8 @@ const _module = {
                 return new Cluster(name, <any>undefined, { urn })
             case "cloud-toolkit-aws:kubernetes:ClusterAddons":
                 return new ClusterAddons(name, <any>undefined, { urn })
+            case "cloud-toolkit-aws:kubernetes:ClusterAutoscaler":
+                return new ClusterAutoscaler(name, <any>undefined, { urn })
             case "cloud-toolkit-aws:kubernetes:ExternalDns":
                 return new ExternalDns(name, <any>undefined, { urn })
             case "cloud-toolkit-aws:kubernetes:IngressNginx":

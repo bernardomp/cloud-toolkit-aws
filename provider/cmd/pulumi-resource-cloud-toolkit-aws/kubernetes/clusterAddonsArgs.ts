@@ -9,6 +9,7 @@ export interface ClusterAddonsArgs {
   domain: string;
   ingress?: ClusterAddonsIngressArgs;
   zoneArns: pulumi.Input<string>[];
+  clusterName: pulumi.Input<string>;
 }
 
 export interface ClusterAddonsIngressArgs {

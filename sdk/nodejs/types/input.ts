@@ -14,18 +14,18 @@ export namespace email {
         /**
          * Amazon Resource Name for the Queue component.
          */
-        arn?: pulumi.Input<string>;
+        arn: pulumi.Input<string>;
         /**
          * Endpoint of the Queue component in AWS.
          */
-        url?: pulumi.Input<string>;
+        url: pulumi.Input<string>;
     }
 
     export interface NotificationTypeArgsArgs {
         /**
          * Enables the feature.
          */
-        enabled?: pulumi.Input<boolean>;
+        enabled: pulumi.Input<boolean>;
         /**
          * Include original headers on the stored messages in the Queue(s).
          */
@@ -41,7 +41,7 @@ export namespace email {
         /**
          * Arguments to include Queues built and implemented outside of the Email Sender Component. Useful when subscribing a single Queue to two or more Topics or when migrating existing ones.
          */
-        additionalQueues?: pulumi.Input<pulumi.Input<inputs.email.AdditionalQueueArgsArgs>[]>;
+        additionalQueues: pulumi.Input<pulumi.Input<inputs.email.AdditionalQueueArgsArgs>[]>;
         /**
          * Configuration for the Default Queues. If left blank, Queues created for this Notification Type will be standard, non-fifo, with a Dead Letter Queue attached to them.
          */
@@ -49,18 +49,19 @@ export namespace email {
         /**
          * Number of default Queues that will be created and attached to a Topic.
          */
-        numberOfDefaultQueues?: pulumi.Input<number>;
+        numberOfDefaultQueues: pulumi.Input<number>;
     }
 }
 
 export namespace kubernetes {
     export interface ClusterAddonsArgsArgs {
-        domain?: pulumi.Input<string>;
-        identityProvidersArn?: pulumi.Input<pulumi.Input<string>[]>;
+        clusterName: pulumi.Input<string>;
+        domain: pulumi.Input<string>;
+        identityProvidersArn: pulumi.Input<pulumi.Input<string>[]>;
         ingress?: pulumi.Input<inputs.kubernetes.ClusterAddonsIngressArgsArgs>;
-        issuerUrl?: pulumi.Input<string>;
-        k8sProvider?: pulumi.Input<pulumiKubernetes.Provider>;
-        zoneArns?: pulumi.Input<pulumi.Input<string>[]>;
+        issuerUrl: pulumi.Input<string>;
+        k8sProvider: pulumi.Input<pulumiKubernetes.Provider>;
+        zoneArns: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface ClusterAddonsIngressArgsArgs {
@@ -93,19 +94,19 @@ export namespace kubernetes {
         /**
          * The maxium number of nodes running in the node group. Defaults to 2.
          */
-        maxCount?: pulumi.Input<number>;
+        maxCount: pulumi.Input<number>;
         /**
          * The maximum number of nodes unavailable at once during a version update. Defaults to 1.
          */
-        maxUnavailable?: pulumi.Input<number>;
+        maxUnavailable: pulumi.Input<number>;
         /**
          * The minimum number of nodes running in the node group. Defaults to 1.
          */
-        minCount?: pulumi.Input<number>;
+        minCount: pulumi.Input<number>;
         /**
          * The Node Group name.
          */
-        name?: pulumi.Input<string>;
+        name: pulumi.Input<string>;
         /**
          * The subnets type to be used to deploy the Node Groups.
          */
@@ -116,7 +117,7 @@ export namespace kubernetes {
         /**
          * Enable the default OIDC Provider that is used in the cluster to let Service Accounts to authenticate against AWS with a given IAM Role.
          */
-        enableDefaultProvider?: pulumi.Input<boolean>;
+        enableDefaultProvider: pulumi.Input<boolean>;
     }
 
     export interface ClusterPrivateApiArgsArgs {
@@ -202,11 +203,11 @@ export namespace landingZone {
         /**
          * The email associated to the IAM Account.
          */
-        email?: pulumi.Input<string>;
+        email: pulumi.Input<string>;
         /**
          * The name of the IAM Account.
          */
-        name?: pulumi.Input<string>;
+        name: pulumi.Input<string>;
         ou?: pulumi.Input<string>;
         /**
          * The parentId of the imported account.
@@ -239,7 +240,7 @@ export namespace serverless {
         /**
          * Enables the feature.
          */
-        enable?: pulumi.Input<boolean>;
+        enable: pulumi.Input<boolean>;
         /**
          * Placing a Queue ARN will set said already existing Queue as a Dead Letter Queue for the new one.
          */
@@ -251,7 +252,7 @@ export namespace serverless {
         /**
          * Dead Letter Queue type attached to the component to create.
          */
-        type?: pulumi.Input<enums.serverless.DeadLetterQueueTypes>;
+        type: pulumi.Input<enums.serverless.DeadLetterQueueTypes>;
     }
 
     export interface QueueArgsArgs {
@@ -281,15 +282,15 @@ export namespace serverless {
 export namespace storage {
     export interface BucketEncryptionArgsArgs {
         customKeyId?: pulumi.Input<string>;
-        enabled?: pulumi.Input<boolean>;
+        enabled: pulumi.Input<boolean>;
     }
 
     export interface BucketReplicationArgsArgs {
-        bucketArn?: pulumi.Input<string>;
+        bucketArn: pulumi.Input<string>;
     }
 
     export interface BucketWebsiteArgsArgs {
-        errorDocument?: pulumi.Input<string>;
-        indexDocument?: pulumi.Input<string>;
+        errorDocument: pulumi.Input<string>;
+        indexDocument: pulumi.Input<string>;
     }
 }

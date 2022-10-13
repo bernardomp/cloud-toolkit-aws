@@ -7,6 +7,7 @@ import { ArgoCD } from "./argocd";
 import { IngressNginx } from "./ingressNginx";
 import { CertManager } from "./certManager";
 import { ExternalDns } from "./externalDns";
+import { ClusterAutoscaler } from "./clusterAutoscaler"
 import {
   ClusterAddonsArgs,
   defaultClusterAddonsArgs,
@@ -25,6 +26,7 @@ export class ClusterAddons extends pulumi.ComponentResource {
   public readonly certManager: CertManager;
   public readonly adminIngressNginx: IngressNginx;
   public readonly externalDns: ExternalDns;
+  public readonly clusterAutoscaler: ClusterAutoscaler;
 
   constructor(
     name: string,
@@ -62,11 +64,14 @@ export class ClusterAddons extends pulumi.ComponentResource {
     });
     this.adminIngressNginx = this.setupAdminIngressNginx(ingressOpts);
 
+    this.clusterAutoscaler = this.setupClusterAutoscaler(argocdApplicationsOpts);
+
     this.registerOutputs({
       argocd: this.argocd,
       certManager: this.certManager,
       externalDns: this.externalDns,
       adminIngressNginx: this.adminIngressNginx,
+      clusterAutoscaler: this.clusterAutoscaler
     });
   }
 
@@ -120,6 +125,19 @@ export class ClusterAddons extends pulumi.ComponentResource {
       k8sProvider: this.args.k8sProvider,
       className: "admin",
       public: true,
+    }, opts);
+  }
+
+  private setupClusterAutoscaler(opts?: pulumi.ResourceOptions): ClusterAutoscaler {
+    return new ClusterAutoscaler(`${this.name}-cluster-autoscaler`, {
+      name: "cluster-autoscaler",
+      namespace: "system-cluster-autoscaler",
+      createNamespace: true,
+      k8sProvider: this.args.k8sProvider,
+      identityProvidersArn: [...this.args.identityProvidersArn],
+      serviceAccountName: "cluster-autoscaler",
+      issuerUrl: this.args.issuerUrl,
+      clusterName: this.args.clusterName
     }, opts);
   }
 }

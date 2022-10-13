@@ -9,14 +9,171 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 from ._enums import *
+import pulumi_kubernetes
 
 __all__ = [
+    'ClusterAddonsArgsArgs',
+    'ClusterAddonsIngressArgsArgs',
+    'ClusterAddonsIngressItemArgsArgs',
     'ClusterApiArgsArgs',
     'ClusterNodeGroupArgsArgs',
     'ClusterOidcProvidersArgsArgs',
     'ClusterPrivateApiArgsArgs',
     'ClusterPublicApiArgsArgs',
 ]
+
+@pulumi.input_type
+class ClusterAddonsArgsArgs:
+    def __init__(__self__, *,
+                 cluster_name: pulumi.Input[str],
+                 domain: pulumi.Input[str],
+                 identity_providers_arn: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 issuer_url: pulumi.Input[str],
+                 k8s_provider: pulumi.Input['pulumi_kubernetes.Provider'],
+                 zone_arns: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 ingress: Optional[pulumi.Input['ClusterAddonsIngressArgsArgs']] = None):
+        pulumi.set(__self__, "cluster_name", cluster_name)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "identity_providers_arn", identity_providers_arn)
+        pulumi.set(__self__, "issuer_url", issuer_url)
+        pulumi.set(__self__, "k8s_provider", k8s_provider)
+        pulumi.set(__self__, "zone_arns", zone_arns)
+        if ingress is not None:
+            pulumi.set(__self__, "ingress", ingress)
+
+    @property
+    @pulumi.getter(name="clusterName")
+    def cluster_name(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "cluster_name")
+
+    @cluster_name.setter
+    def cluster_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_name", value)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "domain")
+
+    @domain.setter
+    def domain(self, value: pulumi.Input[str]):
+        pulumi.set(self, "domain", value)
+
+    @property
+    @pulumi.getter(name="identityProvidersArn")
+    def identity_providers_arn(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        return pulumi.get(self, "identity_providers_arn")
+
+    @identity_providers_arn.setter
+    def identity_providers_arn(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "identity_providers_arn", value)
+
+    @property
+    @pulumi.getter(name="issuerUrl")
+    def issuer_url(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "issuer_url")
+
+    @issuer_url.setter
+    def issuer_url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "issuer_url", value)
+
+    @property
+    @pulumi.getter(name="k8sProvider")
+    def k8s_provider(self) -> pulumi.Input['pulumi_kubernetes.Provider']:
+        return pulumi.get(self, "k8s_provider")
+
+    @k8s_provider.setter
+    def k8s_provider(self, value: pulumi.Input['pulumi_kubernetes.Provider']):
+        pulumi.set(self, "k8s_provider", value)
+
+    @property
+    @pulumi.getter(name="zoneArns")
+    def zone_arns(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        return pulumi.get(self, "zone_arns")
+
+    @zone_arns.setter
+    def zone_arns(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "zone_arns", value)
+
+    @property
+    @pulumi.getter
+    def ingress(self) -> Optional[pulumi.Input['ClusterAddonsIngressArgsArgs']]:
+        return pulumi.get(self, "ingress")
+
+    @ingress.setter
+    def ingress(self, value: Optional[pulumi.Input['ClusterAddonsIngressArgsArgs']]):
+        pulumi.set(self, "ingress", value)
+
+
+@pulumi.input_type
+class ClusterAddonsIngressArgsArgs:
+    def __init__(__self__, *,
+                 admin: Optional[pulumi.Input['ClusterAddonsIngressItemArgsArgs']] = None,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 global_: Optional[pulumi.Input['ClusterAddonsIngressItemArgsArgs']] = None):
+        if admin is not None:
+            pulumi.set(__self__, "admin", admin)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if global_ is not None:
+            pulumi.set(__self__, "global_", global_)
+
+    @property
+    @pulumi.getter
+    def admin(self) -> Optional[pulumi.Input['ClusterAddonsIngressItemArgsArgs']]:
+        return pulumi.get(self, "admin")
+
+    @admin.setter
+    def admin(self, value: Optional[pulumi.Input['ClusterAddonsIngressItemArgsArgs']]):
+        pulumi.set(self, "admin", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="global")
+    def global_(self) -> Optional[pulumi.Input['ClusterAddonsIngressItemArgsArgs']]:
+        return pulumi.get(self, "global_")
+
+    @global_.setter
+    def global_(self, value: Optional[pulumi.Input['ClusterAddonsIngressItemArgsArgs']]):
+        pulumi.set(self, "global_", value)
+
+
+@pulumi.input_type
+class ClusterAddonsIngressItemArgsArgs:
+    def __init__(__self__, *,
+                 public: Optional[pulumi.Input[bool]] = None,
+                 whitelist: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        if public is not None:
+            pulumi.set(__self__, "public", public)
+        if whitelist is not None:
+            pulumi.set(__self__, "whitelist", whitelist)
+
+    @property
+    @pulumi.getter
+    def public(self) -> Optional[pulumi.Input[bool]]:
+        return pulumi.get(self, "public")
+
+    @public.setter
+    def public(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "public", value)
+
+    @property
+    @pulumi.getter
+    def whitelist(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "whitelist")
+
+    @whitelist.setter
+    def whitelist(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "whitelist", value)
+
 
 @pulumi.input_type
 class ClusterApiArgsArgs:
@@ -60,32 +217,76 @@ class ClusterApiArgsArgs:
 @pulumi.input_type
 class ClusterNodeGroupArgsArgs:
     def __init__(__self__, *,
+                 max_count: pulumi.Input[float],
+                 max_unavailable: pulumi.Input[float],
+                 min_count: pulumi.Input[float],
+                 name: pulumi.Input[str],
                  instance_type: Optional[pulumi.Input[str]] = None,
-                 max_count: Optional[pulumi.Input[float]] = None,
-                 max_unavailable: Optional[pulumi.Input[float]] = None,
-                 min_count: Optional[pulumi.Input[float]] = None,
-                 name: Optional[pulumi.Input[str]] = None,
                  subnets_type: Optional[pulumi.Input['ClusterSubnetsType']] = None):
         """
-        :param pulumi.Input[str] instance_type: The EC2 Instance Type to be used to create the Nodes.
         :param pulumi.Input[float] max_count: The maxium number of nodes running in the node group. Defaults to 2.
         :param pulumi.Input[float] max_unavailable: The maximum number of nodes unavailable at once during a version update. Defaults to 1.
         :param pulumi.Input[float] min_count: The minimum number of nodes running in the node group. Defaults to 1.
         :param pulumi.Input[str] name: The Node Group name.
+        :param pulumi.Input[str] instance_type: The EC2 Instance Type to be used to create the Nodes.
         :param pulumi.Input['ClusterSubnetsType'] subnets_type: The subnets type to be used to deploy the Node Groups.
         """
+        pulumi.set(__self__, "max_count", max_count)
+        pulumi.set(__self__, "max_unavailable", max_unavailable)
+        pulumi.set(__self__, "min_count", min_count)
+        pulumi.set(__self__, "name", name)
         if instance_type is not None:
             pulumi.set(__self__, "instance_type", instance_type)
-        if max_count is not None:
-            pulumi.set(__self__, "max_count", max_count)
-        if max_unavailable is not None:
-            pulumi.set(__self__, "max_unavailable", max_unavailable)
-        if min_count is not None:
-            pulumi.set(__self__, "min_count", min_count)
-        if name is not None:
-            pulumi.set(__self__, "name", name)
         if subnets_type is not None:
             pulumi.set(__self__, "subnets_type", subnets_type)
+
+    @property
+    @pulumi.getter(name="maxCount")
+    def max_count(self) -> pulumi.Input[float]:
+        """
+        The maxium number of nodes running in the node group. Defaults to 2.
+        """
+        return pulumi.get(self, "max_count")
+
+    @max_count.setter
+    def max_count(self, value: pulumi.Input[float]):
+        pulumi.set(self, "max_count", value)
+
+    @property
+    @pulumi.getter(name="maxUnavailable")
+    def max_unavailable(self) -> pulumi.Input[float]:
+        """
+        The maximum number of nodes unavailable at once during a version update. Defaults to 1.
+        """
+        return pulumi.get(self, "max_unavailable")
+
+    @max_unavailable.setter
+    def max_unavailable(self, value: pulumi.Input[float]):
+        pulumi.set(self, "max_unavailable", value)
+
+    @property
+    @pulumi.getter(name="minCount")
+    def min_count(self) -> pulumi.Input[float]:
+        """
+        The minimum number of nodes running in the node group. Defaults to 1.
+        """
+        return pulumi.get(self, "min_count")
+
+    @min_count.setter
+    def min_count(self, value: pulumi.Input[float]):
+        pulumi.set(self, "min_count", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        The Node Group name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter(name="instanceType")
@@ -98,54 +299,6 @@ class ClusterNodeGroupArgsArgs:
     @instance_type.setter
     def instance_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "instance_type", value)
-
-    @property
-    @pulumi.getter(name="maxCount")
-    def max_count(self) -> Optional[pulumi.Input[float]]:
-        """
-        The maxium number of nodes running in the node group. Defaults to 2.
-        """
-        return pulumi.get(self, "max_count")
-
-    @max_count.setter
-    def max_count(self, value: Optional[pulumi.Input[float]]):
-        pulumi.set(self, "max_count", value)
-
-    @property
-    @pulumi.getter(name="maxUnavailable")
-    def max_unavailable(self) -> Optional[pulumi.Input[float]]:
-        """
-        The maximum number of nodes unavailable at once during a version update. Defaults to 1.
-        """
-        return pulumi.get(self, "max_unavailable")
-
-    @max_unavailable.setter
-    def max_unavailable(self, value: Optional[pulumi.Input[float]]):
-        pulumi.set(self, "max_unavailable", value)
-
-    @property
-    @pulumi.getter(name="minCount")
-    def min_count(self) -> Optional[pulumi.Input[float]]:
-        """
-        The minimum number of nodes running in the node group. Defaults to 1.
-        """
-        return pulumi.get(self, "min_count")
-
-    @min_count.setter
-    def min_count(self, value: Optional[pulumi.Input[float]]):
-        pulumi.set(self, "min_count", value)
-
-    @property
-    @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[str]]:
-        """
-        The Node Group name.
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter(name="subnetsType")
@@ -163,23 +316,22 @@ class ClusterNodeGroupArgsArgs:
 @pulumi.input_type
 class ClusterOidcProvidersArgsArgs:
     def __init__(__self__, *,
-                 enable_default_provider: Optional[pulumi.Input[bool]] = None):
+                 enable_default_provider: pulumi.Input[bool]):
         """
         :param pulumi.Input[bool] enable_default_provider: Enable the default OIDC Provider that is used in the cluster to let Service Accounts to authenticate against AWS with a given IAM Role.
         """
-        if enable_default_provider is not None:
-            pulumi.set(__self__, "enable_default_provider", enable_default_provider)
+        pulumi.set(__self__, "enable_default_provider", enable_default_provider)
 
     @property
     @pulumi.getter(name="enableDefaultProvider")
-    def enable_default_provider(self) -> Optional[pulumi.Input[bool]]:
+    def enable_default_provider(self) -> pulumi.Input[bool]:
         """
         Enable the default OIDC Provider that is used in the cluster to let Service Accounts to authenticate against AWS with a given IAM Role.
         """
         return pulumi.get(self, "enable_default_provider")
 
     @enable_default_provider.setter
-    def enable_default_provider(self, value: Optional[pulumi.Input[bool]]):
+    def enable_default_provider(self, value: pulumi.Input[bool]):
         pulumi.set(self, "enable_default_provider", value)
 
 

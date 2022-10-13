@@ -748,6 +748,7 @@ users:
       issuerUrl: this.defaultOidcProvider?.url || "",
       domain: this.domain,
       zoneArns: [zoneArn],
+      clusterName: this.name
     }, opts);
   }
 

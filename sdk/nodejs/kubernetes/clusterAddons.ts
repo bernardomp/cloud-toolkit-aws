@@ -9,7 +9,7 @@ import * as utilities from "../utilities";
 
 import * as pulumiKubernetes from "@pulumi/kubernetes";
 
-import {ArgoCD, CertManager, ExternalDns, IngressNginx} from "./index";
+import {ArgoCD, CertManager, ClusterAutoscaler, ExternalDns, IngressNginx} from "./index";
 
 /**
  * ClusterAddons is a component that manages the Lubernetes addons to setup a production-ready cluster.
@@ -32,6 +32,7 @@ export class ClusterAddons extends pulumi.ComponentResource {
     public /*out*/ readonly adminIngressNginx!: pulumi.Output<IngressNginx>;
     public /*out*/ readonly argocd!: pulumi.Output<ArgoCD>;
     public /*out*/ readonly certManager!: pulumi.Output<CertManager>;
+    public /*out*/ readonly clusterAutoscaler!: pulumi.Output<ClusterAutoscaler>;
     public /*out*/ readonly externalDns!: pulumi.Output<ExternalDns>;
 
     /**
@@ -45,6 +46,9 @@ export class ClusterAddons extends pulumi.ComponentResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
+            if ((!args || args.clusterName === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clusterName'");
+            }
             if ((!args || args.domain === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'domain'");
             }
@@ -60,6 +64,7 @@ export class ClusterAddons extends pulumi.ComponentResource {
             if ((!args || args.zoneArns === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'zoneArns'");
             }
+            resourceInputs["clusterName"] = args ? args.clusterName : undefined;
             resourceInputs["domain"] = args ? args.domain : undefined;
             resourceInputs["identityProvidersArn"] = args ? args.identityProvidersArn : undefined;
             resourceInputs["ingress"] = args ? args.ingress : undefined;
@@ -69,11 +74,13 @@ export class ClusterAddons extends pulumi.ComponentResource {
             resourceInputs["adminIngressNginx"] = undefined /*out*/;
             resourceInputs["argocd"] = undefined /*out*/;
             resourceInputs["certManager"] = undefined /*out*/;
+            resourceInputs["clusterAutoscaler"] = undefined /*out*/;
             resourceInputs["externalDns"] = undefined /*out*/;
         } else {
             resourceInputs["adminIngressNginx"] = undefined /*out*/;
             resourceInputs["argocd"] = undefined /*out*/;
             resourceInputs["certManager"] = undefined /*out*/;
+            resourceInputs["clusterAutoscaler"] = undefined /*out*/;
             resourceInputs["externalDns"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -85,6 +92,7 @@ export class ClusterAddons extends pulumi.ComponentResource {
  * The set of arguments for constructing a ClusterAddons resource.
  */
 export interface ClusterAddonsArgs {
+    clusterName: pulumi.Input<string>;
     domain: pulumi.Input<string>;
     identityProvidersArn: pulumi.Input<pulumi.Input<string>[]>;
     ingress?: pulumi.Input<inputs.kubernetes.ClusterAddonsIngressArgsArgs>;

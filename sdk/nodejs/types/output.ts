@@ -14,22 +14,22 @@ export namespace email {
         /**
          * Amazon Resource Name for the Queue component.
          */
-        arn?: string;
+        arn: string;
         /**
          * Endpoint of the Queue component in AWS.
          */
-        url?: string;
+        url: string;
     }
 
     export interface DnsDkimRecordArgs {
         /**
          * Name of the Record.
          */
-        name?: string;
+        name: string;
         /**
          * Token of the Record.
          */
-        token?: string;
+        token: string;
     }
 
 }
@@ -39,13 +39,13 @@ export namespace kubernetes {
 
 export namespace landingZone {
     export interface AccountMappingArgs {
-        account?: pulumiAws.organizations.Account;
-        accountName?: string;
+        account: pulumiAws.organizations.Account;
+        accountName: string;
     }
 
     export interface OrganizationalUnitMapping {
-        accountName?: string;
-        organizationalUnit?: pulumiAws.organizations.OrganizationalUnit;
+        accountName: string;
+        organizationalUnit: pulumiAws.organizations.OrganizationalUnit;
     }
 
 }

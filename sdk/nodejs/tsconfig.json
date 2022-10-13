@@ -22,6 +22,7 @@
         "kubernetes/certManager.ts",
         "kubernetes/cluster.ts",
         "kubernetes/clusterAddons.ts",
+        "kubernetes/clusterAutoscaler.ts",
         "kubernetes/externalDns.ts",
         "kubernetes/index.ts",
         "kubernetes/ingressNginx.ts",
