@@ -139,6 +139,22 @@ export class ClusterAutoscaler extends ApplicationAddon<ClusterAutoscalerArgs> {
                             name: "rbac.serviceAccount.name",
                             value: this.irsa.serviceAccount.metadata.name,
                         },
+                        {
+                            name: "extraArgs.scale-down-delay-after-add",
+                            value: this.args.downscale?.delayAfterAdd
+                        },
+                        {
+                            name: "extraArgs.scale-down-delay-after-delete",
+                            value: this.args.downscale?.delayAfterDelete
+                        },
+                        {
+                            name: "extraArgs.scale-down-delay-after-failure",
+                            value: this.args.downscale?.delayAfterFailure
+                        },
+                        {
+                            name: "extraArgs.scale-down-unneeded-time",
+                            value: this.args.downscale?.unneededTime
+                        }
                     ],
                 },
             },

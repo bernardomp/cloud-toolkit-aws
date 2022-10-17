@@ -10,6 +10,7 @@ export interface ClusterAddonsArgs {
   ingress?: ClusterAddonsIngressArgs;
   zoneArns: pulumi.Input<string>[];
   clusterName: pulumi.Input<string>;
+  clusterAutoscaler: ClusterAddonsClusterAutoscalerArgs;
 }
 
 export interface ClusterAddonsIngressArgs {
@@ -21,6 +22,13 @@ export interface ClusterAddonsIngressArgs {
 export interface ClusterAddonsIngressItemArgs {
   public?: boolean;
   whitelist?: pulumi.Input<string>[];
+}
+
+export interface ClusterAddonsClusterAutoscalerArgs {
+  delayAfterAdd?: number;
+  delayAfterDelete?: number;
+  delayAfterFailure?: number;
+  unneededTime?: number;
 }
 
 export const defaultClusterAddonsArgs = {

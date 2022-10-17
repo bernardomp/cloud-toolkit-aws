@@ -748,7 +748,13 @@ users:
       issuerUrl: this.defaultOidcProvider?.url || "",
       domain: this.domain,
       zoneArns: [zoneArn],
-      clusterName: this.name
+      clusterName: this.name,
+      clusterAutoscaler: {
+        delayAfterAdd: this.config.addons?.clusterAutoscaler.delayAfterAdd,
+        delayAfterFailure: this.config.addons?.clusterAutoscaler.delayAfterFailure,
+        delayAfterDelete: this.config.addons?.clusterAutoscaler.delayAfterDelete,
+        unneededTime: this.config.addons?.clusterAutoscaler.unneededTime
+      }
     }, opts);
   }
 
